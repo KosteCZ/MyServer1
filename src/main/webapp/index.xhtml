@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:body>
+
+	<h2>Temperature and humidity</h2>
+
+	<table cellspacing="0" cellpadding="0"
+		style="width: 100%; text-align: left; background-color: grey;">
+		<tr>
+			<th>Table Header</th>
+			<th>Table Header</th>
+		</tr>
+		<tr>
+			<td style="background-color: #C0C0C0; color: black;">Table cell</td>
+			<td style="background-color: #E8E8E8; color: black;">Table cell</td>
+		</tr>
+		<tr>
+			<td style="background-color: #E8E8E8; color: black;">Table cell</td>
+			<td style="background-color: #C0C0C0; color: black;">Table cell</td>
+		</tr>
+		<tr>
+			<td style="background-color: #C0C0C0; color: black;">Table cell</td>
+			<td style="background-color: #E8E8E8; color: black;">Table cell</td>
+		</tr>
+		<tr>
+			<td style="background-color: #E8E8E8; color: black;">Table cell</td>
+			<td style="background-color: #C0C0C0; color: black;">Table cell</td>
+		</tr>
+	</table>
+
+	<p>START</p>
+	<p>#{temperatureAndHumidity.printDemoMessage()}</p>
+	<p>END</p>
+
+	<li>1</li>
+	<li>#{temperatureAndHumidity.printDemoMessage()}</li>
+
+	<li>2</li>
+	<li><h:outputText
+			value="#{temperatureAndHumidity.printDemoMessage()}" /></li>
+
+	<li>3</li>
+	<li><h:outputText
+			value="#{temperatureAndHumidity.printDemoMessage()}" styleClass="abc" /></li>
+
+	<li>4</li>
+	<li><h:outputText
+			value="#{temperatureAndHumidity.printDemoMessage()}" escape="true" /></li>
+
+	<li>5</li>
+	<li><h:outputText
+			value="#{temperatureAndHumidity.printDemoMessage()}" escape="false" /></li>
+			
+	<p>START</p>
+	<p>#{temperatureAndHumidity.printDataFromDB()}</p>
+	<p>END</p>
+	
+	<p>START</p>
+	<p>#{temperatureAndHumidity.printLastDataFromDB()}</p>
+	<p>END</p>
+
+</h:body>
+
+</html>
