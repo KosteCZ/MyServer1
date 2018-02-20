@@ -108,19 +108,14 @@ public class TemperatureAndHumidityBean implements Serializable {
 	
 	public String printCurrentTime() {
 		
-		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss d. MMM yyyy");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss d.M.yyyy");
 		LocalDateTime date = LocalDateTime.now();
-		String text = date.format(formatter);
+		return date.format(formatter);
 		
-		/*LocalDate parsedDate = LocalDate.parse(text, formatter);
-		
-		LocalTime.now().ofLocalizedDate(DateTimeFormatter.ISO_LOCAL_DATE);
-		LocalTime.now().ofLocalizedDateofLocalizedTime(timeStyle);
-		
-		DateTime date = new DateTime();*/
-		return text;
-		
+	}
+
+	public List<String[]> selectFromTableTemperatureAndHumidityAndReturnAsList(LocalDateTime localDateTime) {
+		return SQLiteOperations.selectFromTableTemperatureAndHumidityAndReturnAsList(localDateTime);
 	}
 	
 }

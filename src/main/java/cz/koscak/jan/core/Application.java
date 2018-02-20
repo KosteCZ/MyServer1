@@ -6,6 +6,14 @@ import java.util.Properties;
 import cz.koscak.jan.utilities.ApplicationConfigurationUtils;
 import cz.koscak.jan.utilities.SQLiteClient;
 
+/**
+ * Core application class.
+ * 
+ * NOTE: Access point for TomCat is ApplicationInitializationServlet class.
+ * 
+ * @author koscaj01
+ *
+ */
 public class Application {
 	
 	private static String pathToDB;

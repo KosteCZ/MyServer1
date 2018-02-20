@@ -26,8 +26,9 @@ public class SQLiteClient {
 	}
 	
 	/**
-	 * Connect to the test.db database
-	 * @return the Connection object
+	 * Connect to database
+	 * 
+	 * @return the Connection connection
 	 */
 	private static Connection connect() {
 		
@@ -85,24 +86,27 @@ public class SQLiteClient {
 		}
 	}*/
 	
-	/*insert or replace into Book (ID, Name, TypeID, Level, Seen) values
-	((select ID from Book where Name = "SearchName"), "SearchName", ...);*/
-	
 	public static void createTable(String sql) {
+		
 		try {
+			
 			Connection connection = connect();   
 			Statement statement  = connection.createStatement();
 			statement.executeQuery(sql);
 			statement.close();
-			connection.close();			
+			connection.close();	
+			
 		} catch (SQLException e) {
-			System.err.println(e.getMessage());
+			System.err.println(e.getMessage());		
 		}
+		
 	}
 
+	/* OLD style
 	public static void select(String sql) {
 		
 		try {
+			
 			Connection connection	= connect();
 			Statement statement	= connection.createStatement();
 			ResultSet rs	= statement.executeQuery(sql);
@@ -116,24 +120,28 @@ public class SQLiteClient {
 			}
 			
 			statement.close();
-			connection.close();			
+			connection.close();	
+			
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		}
+		
 	}
+	*/
 	
 	public static List<String[]> selectAndReturnAsList(String sql) {
 		
 		List<String[]> result = new ArrayList<String[]>();
 		
 		try {
+			
 			Connection connection = connect();
 			Statement statement	= connection.createStatement();
 			ResultSet rs = statement.executeQuery(sql);
 			
 			int columnCount = rs.getMetaData().getColumnCount();
-			while(rs.next())
-			{
+			
+			while(rs.next()) {
 			    String[] row = new String[columnCount];
 			    for (int i=0; i <columnCount ; i++)
 			    {
@@ -154,6 +162,26 @@ public class SQLiteClient {
 		
 	}
 	
+	public static String[] selectFirstRow(String sql) {
+		return selectAndReturnAsList(sql).get(0);
+	}
+	
+	public static String selectString(String sql) {
+		return selectFirstRow(sql)[0];
+	}
+		
+	public static Integer selectInteger(String sql) {
+		Integer result = null;
+		try {
+			result = Integer.valueOf(selectString(sql));
+		} catch (NumberFormatException exception) {
+		}
+		return result;
+	}
+	
+	// EXAMPLE1: String sql = "INSERT OR REPLACE INTO message_table (headers, payload) VALUES ('" + headers + "', '" + payload + "')";
+	/* EXAMPLE2: insert or replace into Book (ID, Name, TypeID, Level, Seen) values
+	((select ID from Book where Name = "SearchName"), "SearchName", ...);*/
 	public static void insert(String sql) {
 		try {
 			Connection connection = connect();   
@@ -164,7 +192,6 @@ public class SQLiteClient {
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		}
-	}
-	
+	}	
 
 }

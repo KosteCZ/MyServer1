@@ -24,13 +24,13 @@
 		<dependency>
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-api</artifactId>
-			<version>2.1.0-b03</version>
+			<version>2.2.9</version>
 		</dependency>
 		<dependency>
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-impl</artifactId>
-			<version>2.1.0-b03</version>
-		</dependency>
+			<version>2.2.9</version>
+		</dependency>	
 
 		<!-- http://repo1.maven.org/maven -->
 		<dependency>
@@ -48,7 +48,7 @@
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
-			<version>2.1</version>
+			<version>2.2</version>
 		</dependency>
 
 		<dependency>
@@ -57,12 +57,28 @@
 			<version>1.0</version>
 		</dependency>
 		
+		<!-- Manually added Java Server Faces reference - from: https://javaee.github.io/javaserverfaces-spec/ -->
+		<dependency>
+  			<groupId>javax.faces</groupId>
+  			<artifactId>javax.faces-api</artifactId>
+  			<version>2.2</version>
+  			<scope>provided</scope>
+		</dependency>
+		
 		<!-- SQLite JDBC driver -->
 		<dependency>
 			<groupId>org.xerial</groupId>
 			<artifactId>sqlite-jdbc</artifactId>
 			<version>3.21.0.1</version>
 		</dependency>
+		
+		<!-- JFreeChart - for chart and graph generation -->
+		<dependency>
+			<groupId>org.jfree</groupId>
+			<artifactId>jfreechart</artifactId>
+			<version>1.0.19</version>
+		</dependency>
+		
 
 	</dependencies>
 

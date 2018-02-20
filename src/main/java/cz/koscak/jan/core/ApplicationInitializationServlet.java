@@ -5,6 +5,11 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
+/**
+ * Access point for TomCat (or other application server/servlet container).
+ * 
+ * @author Jan Koscak
+ */
 public class ApplicationInitializationServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
