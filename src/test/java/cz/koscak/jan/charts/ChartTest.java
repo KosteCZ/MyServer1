@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -16,10 +15,10 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.DateAxis;
 import org.jfree.chart.axis.DateTickUnit;
 import org.jfree.chart.axis.DateTickUnitType;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.data.Range;
-import org.jfree.data.time.DateRange;
 import org.jfree.data.time.Minute;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
@@ -43,7 +42,7 @@ public class ChartTest {
     
     private static void generateChart() throws IOException {
     	
-		LocalDateTime localDateTime = LocalDateTime.now().minusDays(20); //.minusDays(1); //.minusDays(5);
+		LocalDateTime localDateTime = LocalDateTime.now().minusDays(22); //.minusDays(1); //.minusDays(5);
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy"); // "HH:mm:ss d.M.yyyy"
 		String dateTimeText = localDateTime.format(formatter);
 
@@ -60,9 +59,9 @@ public class ChartTest {
 		//xyPlot.setBackgroundPaint( Color.WHITE /*Color.LIGHT_GRAY*/ );
 		xyPlot.setBackgroundPaint(new Color(240, 240, 240));
 		
-		int imageWidth = 700; // 1000; // 560;
-		int imageHeight = 400; // 800; // 370;
-		File chartFile = new File("out/xy_chart-teplota-" + dateTimeText + "-5" + ".jpeg");
+		int imageWidth = 600; //700; // 1000; // 560;
+		int imageHeight = 350; //400; // 800; // 370;
+		File chartFile = new File("out/xy_chart-teplota-" + dateTimeText + "-7" + ".jpeg");
 		ChartUtilities.saveChartAsJPEG(chartFile, chart, imageWidth, imageHeight);
         
 	}
@@ -121,7 +120,8 @@ public class ChartTest {
 		ValueAxis domain = plot.getDomainAxis();
 		//domain.setAutoRange(true);
 		ValueAxis range = plot.getRangeAxis();
-		DateAxis axis = (DateAxis) plot.getDomainAxis();
+		DateAxis axisX = (DateAxis) plot.getDomainAxis();
+		NumberAxis axisY = (NumberAxis) plot.getRangeAxis();
 		
 		/*SegmentedTimeline timeline = new SegmentedTimeline(SegmentedTimeline.DAY_SEGMENT_SIZE, 1, 0);
 		axis.setTimeline(timeline);*/
@@ -164,29 +164,49 @@ public class ChartTest {
 		/*date.setDate(localDateTime.getDayOfMonth());
 		date.setMonth(localDateTime.getMonthValue()-1);*/
 		
-		Date minDate = new Date(date.getTime());
+		/*Date minDate = new Date(date.getTime());
 		minDate.setHours(0);
 		minDate.setMinutes(0);
-		minDate.setSeconds(0);
+		minDate.setSeconds(0);*/
+		
+		//Date maxDate = new Date(date.getTime());
+		/*maxDate.setHours(23);
+		maxDate.setMinutes(59);
+		maxDate.setSeconds(59);*/
+		/*maxDate.setDate(maxDate.getDate()+1);
+		maxDate.setHours(0);
+		maxDate.setMinutes(0);
+		maxDate.setSeconds(0);*/
+		
+		Date minDate = new Date(date.getTime()-1);
+		minDate.setHours(23);
+		minDate.setMinutes(59);
+		minDate.setSeconds(59);
 		
 		Date maxDate = new Date(date.getTime());
-		maxDate.setHours(23);
+		/*maxDate.setHours(23);
 		maxDate.setMinutes(59);
-		maxDate.setSeconds(59);
+		maxDate.setSeconds(59);*/
+		maxDate.setDate(maxDate.getDate()+1);
+		maxDate.setHours(0);
+		maxDate.setMinutes(0);
+		maxDate.setSeconds(0);
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 		System.out.println("MinDate: " + sdf.format(minDate));
 		System.out.println("MaxDate: " + sdf.format(maxDate));
 		
-		axis.setMinimumDate(minDate);
-		axis.setMaximumDate(maxDate);
+		axisX.setMinimumDate(minDate);
+		axisX.setMaximumDate(maxDate);
 		
-		axis.setTickUnit(new DateTickUnit(DateTickUnitType.MINUTE, 120));
-		axis.setDateFormatOverride(new SimpleDateFormat("HH:mm"));
+		axisX.setTickUnit(new DateTickUnit(DateTickUnitType.MINUTE, 120));
+		axisX.setDateFormatOverride(new SimpleDateFormat("HH:mm"));
 
 		// range.setRange(-10, 50);
 		range.setRange(0, 30);
-
+		
+		axisY.setTickUnit(new NumberTickUnit(2));
+		
 		return result;
 	}
 
